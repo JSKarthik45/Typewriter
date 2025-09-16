@@ -22,6 +22,9 @@ const router = createRouter({
       component: SpeedTest,
     },
   ],
+  scrollBehavior() {
+    return { top: 0 }
+  },
 })
 
 export default router

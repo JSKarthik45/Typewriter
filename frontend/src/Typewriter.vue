@@ -3,7 +3,11 @@
 </script>
 
 <template>
-    <img src = "/images/Typewriter.svg" alt="Typewriter Logo" width="200"/>
+    <div style = "width: 100vw; height: 100vh">
+        <div>
+
+        </div>
+    </div>
 </template>
 
 <style scoped>

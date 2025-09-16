@@ -18,18 +18,17 @@
     isNavOpen.value = (newPath === "/");
   });
   const items = ref([
-    { label: "Landing page", link: "/", active: true },
     { label: "Typewriter", link: "/app", active: false },
     { label: "Speed Test", link: "/speedtest", active: false },
   ]);
 </script>
 
 <template>
-  <div style = "width: 100vw; height: 100vh;">
-    <div>
+  <div style = "width: 100vw; height: fit-content; background-color: #FAE4E4; margin: 0px;" class = "scroll">
+    <div style = "position: fixed; width: 100%; top: 0; left: 0; z-index: 10000;">
       <Navbar :items = "items" :key="route.path" :isNavOpen="isNavOpen"/>
     </div>
-    <div class = "container-fluid">
+    <div style = "width: 100%;">
       <RouterView  :key="route.path"> </RouterView>
     </div>
   </div>

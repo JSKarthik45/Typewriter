@@ -11,13 +11,14 @@
 </script>
 <template>
     <div class="d-flex justify-content-center">
-        <nav class = "navbar navbar-expand-lg" ref = "navbar">   
+        <nav class = "navbar navbar-expand-lg" ref = "navbar" style = "background: rgba(255, 255, 255, 0.7);">   
             <button class="navbar-toggler border-0 shadow-none w-100" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent">
                 <div class = "center" >
-                    <RouterLink class = "" to = "/" style = "text-decoration: none;">
-                        <img src = "/images/Typewriter.svg"/>
+                    <RouterLink to = "/" style = "text-decoration: none;" class = "center">
+                        <img src = "/images/Logo.svg" style = "width: 50px;"/>
+                        &nbsp;
                         <h1 style = "display: inline; color: black;" class = "center">
-                            TYPEWRITER
+                            WriterType
                         </h1>
                     </RouterLink>
                     &nbsp;
@@ -26,17 +27,25 @@
             </button>
             <div :class="['collapse', 'navbar-collapse', { show: props.isNavOpen }]" id="navbarSupportedContent">
                 <ul class = "navbar-nav center">
+                    <li class = "nav-item center">
+                        <RouterLink to="/" class="desktop-logo d-none d-sm-flex align-items-center nav-link m-1 p-1">
+                            <h4 class = "center pt-2">
+                                WriterType
+                            </h4>
+                            &nbsp;
+                            <img src="/images/Logo.svg" alt="WriterType Logo" style = "width: 40px; height: 40px;"/>
+                        </RouterLink>
+                    </li>
+                </ul>
+                <ul class = "navbar-nav center">
                     <li class = "nav-item center" v-for = "item in props.items">
                         <RouterLink class = "nav-link" :to = "item.link" :class = "{activeBorder: item.active}">
                             <!--<img :src = "`/images/${item.label}.svg`"/>-->
-                            <h4>
+                            <h5>
                                 {{ item.label }}
-                            </h4>
+                            </h5>
                         </RouterLink>
                     </li>
-                    <RouterLink to="/" class="desktop-logo d-none d-sm-flex align-items-center nav-link">
-                        <img src="/images/Typewriter.svg" alt="Typewriter Logo"/>
-                    </RouterLink>
                 </ul>
             </div>
         </nav>
@@ -82,7 +91,9 @@
             /* add these lines or override */
             display: flex;
             align-items: center;
-            padding: 3px 12px;
+            padding: 1px 10px;
+            padding-top: 3px;
+            margin-bottom: 5px;
         }
     }
     @media(min-width: 576px) {
@@ -99,19 +110,22 @@
             margin-right: auto;
             padding: 5px;
         }
+        .nav-link {
+            padding:2px;
+            margin: 2px;
+            padding-top: 8px;
+        }
     }
     ul { 
         list-style-type: none;
         padding: 0px;
     }
     .activeBorder {
-        box-shadow: inset 0 0 10px black;
+        box-shadow: inset 0 0 5px black;
         border-radius: 10px;
     }
     .nav-link {
         position: relative;
-        padding: 10px;
-        margin: 5px;
         border-radius: 15px;
         z-index: 1;
     }
