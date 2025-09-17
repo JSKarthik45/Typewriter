@@ -17,7 +17,7 @@
                     <RouterLink to = "/" style = "text-decoration: none;" class = "center">
                         <img src = "/images/Logo.svg" style = "width: 50px;"/>
                         &nbsp;
-                        <h1 style = "display: inline; color: black;" class = "center">
+                        <h1 style = "display: inline; color: black;" class = "center mt-2">
                             WriterType
                         </h1>
                     </RouterLink>

@@ -26,7 +26,7 @@
             <br/>
             <div class="embed-responsive">
                 <video class="embed-responsive-item videowidth" autoplay muted>
-                    <source src="/public/images/ClutchessDemo.mp4" type="video/mp4">
+                    <source src="/images/ClutchessDemo.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
