@@ -24,12 +24,7 @@
                 </RouterLink>
             </h5>
             <br/>
-            <div class="embed-responsive">
-                <video class="embed-responsive-item videowidth" autoplay muted>
-                    <source src="/images/ClutchessDemo.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
+            <img src = "/images/Typewriter.svg" style = "width: 60vw;"/>
             <br/>
         </div>
     </div>

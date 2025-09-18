@@ -15,6 +15,7 @@
     "bootstrap": "^5.3.8",
     "gsap": "^3.13.0",
     "posthog-js": "^1.266.0",
+    "simple-keyboard": "^3.8.83",
     "vite-plugin-pwa": "^1.0.3",
     "vue": "^3.5.18",
     "vue-router": "^4.5.1"
