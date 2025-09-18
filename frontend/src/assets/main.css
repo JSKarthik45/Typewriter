@@ -40,3 +40,8 @@ body::-webkit-scrollbar-thumb:hover {
   background: #EABCBC;
 }
 
+
+
+:root {
+  --x: 0%;
+}

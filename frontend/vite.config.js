@@ -19,7 +19,7 @@ export default defineConfig({
         theme_color: '#FAE4E4',
         icons: [
           {
-            src: '/images/Typewriter.svg',
+            src: '/images/Logo.svg',
             sizes: 'any',
             type: 'image/svg+xml',
             purpose: 'any'

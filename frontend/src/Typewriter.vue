@@ -1,4 +1,160 @@
 <script setup>
+    import { onMounted, watch, ref, onUnmounted } from "vue";
+    import {gsap} from "gsap";
+    let canvas = null;
+    let str = ref("");
+    let hiddenSpan = null;
+    let maxLines = 12;
+    let maxCharsPerLine = 52;
+
+    // Typewriter sound
+    let typewriterAudio = new Audio('/public/s3.wav');
+    let returnAudio = new Audio('/public/s4.m4a');
+    let bellAudio = new Audio("/public/s5.wav");
+    returnAudio.play();
+    typewriterAudio.volume = 0.5;
+        function playTypewriterSound() {
+            const audio = new Audio('/public/s3.wav');
+              audio.play();
+              audio.volume = 0.15; // Lower volume, set after play for best compatibility
+        }
+    function measureCaretX(currentLine) {
+        // Always create a new span for measurement
+        let tempSpan = document.createElement('span');
+        tempSpan.style.visibility = 'hidden';
+        tempSpan.style.position = 'absolute';
+        tempSpan.style.whiteSpace = 'pre';
+        tempSpan.style.fontFamily = "Special Elite, system-ui";
+        tempSpan.style.fontSize = "large";
+        tempSpan.style.fontWeight = "700";
+        document.body.appendChild(tempSpan);
+
+        // Replace HTML entities for measurement
+        let text = currentLine.replace(/&emsp;&emsp;/g, '    ');
+        tempSpan.textContent = text;
+        let width = tempSpan.offsetWidth;
+
+        // Remove the span after measuring
+        document.body.removeChild(tempSpan);
+
+        return width;
+    }
+
+    onMounted(() => {
+        canvas = document.getElementById("canvas");
+        if(returnAudio) {
+            returnAudio.play();
+        }
+        gsap.to(document.documentElement, {
+            duration: 0.5,
+            "--x": "40%"
+        });
+    });
+
+    onUnmounted(() => {
+        gsap.to(document.documentElement, {
+            duration: 0.6,
+            "--x": "0%"
+        });
+    })
+    
+
+    watch(str, () => {
+        if (canvas) {
+            canvas.innerHTML = str.value;
+        }
+    });
+
+    function getLines(text) {
+        // Split by <br/> or <br>
+        return text.split(/<br\/?>(?![^<]*>)/);
+    }
+
+    function updateCaret(currentLine) {
+        const root = document.documentElement;
+        let canvasWidth = canvas ? canvas.clientWidth : 0;
+        // Measure width of current line plus a placeholder for the next character
+        let nextCharWidth = measureCaretX(currentLine + 'M') - measureCaretX(currentLine);
+        let xPx = measureCaretX(currentLine) + nextCharWidth;
+        console.log(xPx);
+        // Invert: caret starts at baseLeft and moves left as xPx increases
+        let basePx = canvasWidth;
+        let caretX = basePx - xPx;
+        root.style.setProperty('--x', caretX + 'px');
+    }
+
+    document.addEventListener('keydown', function(event) {
+        // Play typewriter sound for visible key presses
+        if (event.key.length === 1 || event.key === 'Backspace' || event.key === 'Enter' || event.key === 'Tab') {
+            // Restart sound if already playing
+                playTypewriterSound();
+        const root = document.documentElement;
+        let lines = getLines(str.value);
+        let currentLine = lines[lines.length - 1] || "";
+
+        // Remove oldest line if maxLines exceeded
+        if (lines.length > maxLines) {
+            lines.shift();
+            str.value = lines.join("<br/>");
+            returnAudio.play();
+            lines = getLines(str.value);
+            currentLine = lines[lines.length - 1] || "";
+        }
+
+        // Backspace
+        if (event.key === "Backspace") {
+            if (str.value.length > 0) {
+                // Remove last char or tag
+                if (str.value.endsWith("<br/>") || str.value.endsWith("<br>")) {
+                    str.value = str.value.replace(/(<br\/>|<br>)$/, "");
+                    lines = getLines(str.value);
+                    currentLine = lines[lines.length - 1] || "";
+                } else {
+                    str.value = str.value.slice(0, -1);
+                    currentLine = currentLine.slice(0, -1);
+                }
+                updateCaret(currentLine);
+            }
+            event.preventDefault();
+            return;
+        }
+
+        // Enter
+        if (event.key === "Enter") {
+            str.value += "<br/>";
+            returnAudio.play();
+            updateCaret("");
+            event.preventDefault();
+            return;
+        }
+
+        // Tab
+        /*if (event.key === "Tab") {
+            str.value += "&emsp;&emsp;";
+            currentLine += "    ";
+            updateCaret(currentLine);
+            event.preventDefault();
+            return;
+        }*/
+
+        // Normal character
+        if (event.key.length === 1) {
+            // Check if current line is too long (pixel-based)
+            let nextLine = currentLine + event.key;
+            let xPx = measureCaretX(nextLine);
+            let canvasWidth = canvas ? canvas.clientWidth : 0;
+            if (canvasWidth && xPx > canvasWidth) {
+                str.value += "<br/>";
+                returnAudio.play();
+                currentLine = "";
+            }
+            str.value += event.key;
+            currentLine += event.key;
+            updateCaret(currentLine);
+            event.preventDefault();
+        }
+    }});
+
 </script>
 
 <template>
@@ -18,10 +174,13 @@
             <div class="rect8 colour2"></div>
             <div class="rect9 colour2"></div>
             <div class="rect11 colour0">
-                <input type = "text" style = "width: 90%; border: none; outline: none; background-color: transparent; font-size: 24px; font-weight: 600;"/>
+                <div style = "position: relative; width: 83%; height: 90%; font-family: 'Special Elite', system-ui; font-size: large; font-weight: 700; display: flex; align-items: end;" class = "mb-1" id = "canvas">
+                    <div style = "position: absolute; bottom: 0; left: 0; width: 100%; height: 20%; background: linear-gradient(to top, #FFFFFF, rgba(255, 255, 255, 0)); pointer-events: none;">
+                    </div>
+                </div>
             </div>
             <div class="rect10 colour2"></div>
-            <div class="rect12 colour0"></div>
+            <div class="rect12 colour5"></div>
             <div class="tri1"></div>
             <div class="rect13 colour0"></div>
             <div class="rect14 colour3"></div>
@@ -45,13 +204,16 @@
     .colour4 {
         background-color: #CEA0A0;
     }
+    .colour5 {
+        background-color: #a37f7f;
+    }
     .rect1 {
-        width: 68%; 
+        width: 60%; 
         height: 22%; 
         z-index: 1; 
         position: absolute; 
         top: 50%; 
-        left: 16%; 
+        left: var(--x); 
         display: flex; 
         justify-content: center; 
         align-items: center;
@@ -77,7 +239,7 @@
         width: 2.5%;
         height: 13%;
         position: absolute;
-        left: 84.5%;
+        left: calc(var(--x) + 60.5%);
         top: 53%;
         border-radius: 12px;
         z-index: 5;
@@ -86,7 +248,7 @@
         width: 0.5%;
         height: 6%;
         position: absolute;
-        left: 84%;
+        left: calc(var(--x) + 60%);
         top: 56.5%;
         z-index: 4;
     }
@@ -94,7 +256,7 @@
         width: 3%;
         height: 14%;
         position: absolute;
-        left: 12.5%;
+        left: calc(var(--x) - 3.5%);
         top: 53%;
         border-radius: 12px;
         z-index: 7;
@@ -103,7 +265,7 @@
         width: 0.5%;
         height: 6%;
         position: absolute;
-        left: 15.5%;
+        left: calc(var(--x) - 0.5%);
         top: 58%;
         z-index: 6;
     }
@@ -111,7 +273,7 @@
         height: 3%;
         width: 8%;
         position: absolute;
-        left: 7.5%;
+        left: calc(var(--x) - 8.5%);
         top: 53%;
         border-radius: 12px;
         z-index: 8;
@@ -120,7 +282,7 @@
         height: 9%;
         width: 3%;
         position: absolute;
-        left: 7.5%;
+        left: calc(var(--x) - 8.5%);
         top: 47%;
         border-radius: 12px;
         z-index: 9;
@@ -136,11 +298,11 @@
     }
     .rect11 {
         width: 50%;
-        height: 50%;
+        height: 60%;
         position: absolute;
         bottom: 35%;
-        left: 25%;
-        border-radius: 16px;
+        left: calc(var(--x) + 5%);
+        border-radius: 16px 16px 0px 0px;
         z-index: 1000;
         display: flex;
         justify-content: center;
@@ -148,11 +310,11 @@
     }
     .rect12 {
         width: 30%;
-        height: 8%;
+        height: 3%;
         position: absolute;
         bottom: 32%;
         left: 35%;
-        border-radius: 12px;
+        border-radius: 0px 0px 12px 12px;
         z-index: 12;
     }
     .tri1 {
@@ -161,7 +323,7 @@
         position: absolute;
         border-left: 20px solid transparent;
         border-right: 20px solid transparent;
-        border-bottom: 30px solid #111111;
+        border-bottom: 30px solid #4C4545;
         bottom: 32%;
         left: 48.5%;
         z-index: 13;
