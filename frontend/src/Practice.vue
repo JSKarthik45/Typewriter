@@ -425,6 +425,7 @@ function handlePhysicalKeyboard(event) {
   white-space: nowrap !important;
   text-overflow: clip !important;
   cursor: text !important;
+  font-family: 'Special Elite', system-ui;
 }
 
 .scrollable-input:focus {
@@ -440,15 +441,15 @@ function handlePhysicalKeyboard(event) {
 }
 
 /* Finger color coding for virtual keyboard - always colored */
-:deep(.finger-left-pinky) { background-color: #FFB6C1 !important; color: black !important; font-weight: bold !important; }
-:deep(.finger-left-ring) { background-color: #FFC0CB !important; color: black !important; font-weight: bold !important; }
-:deep(.finger-left-middle) { background-color: #FFCCCB !important; color: black !important; font-weight: bold !important; }
-:deep(.finger-left-index) { background-color: #FFD6E7 !important; color: black !important; font-weight: bold !important; }
-:deep(.finger-thumb) { background-color: #FFE1E6 !important; color: black !important; font-weight: bold !important; }
-:deep(.finger-right-index) { background-color: #FFEBEE !important; color: black !important; font-weight: bold !important; }
-:deep(.finger-right-middle) { background-color: #F8BBD9 !important; color: black !important; font-weight: bold !important; }
-:deep(.finger-right-ring) { background-color: #F48FB1 !important; color: black !important; font-weight: bold !important; }
-:deep(.finger-right-pinky) { background-color: #F06292 !important; color: black !important; font-weight: bold !important; }
+:deep(.finger-left-pinky) { background-color: #E2B6B6 !important; color: black !important; font-weight: bold !important; }
+:deep(.finger-left-ring) { background-color: #a37f7f !important; color: black !important; font-weight: bold !important; }
+:deep(.finger-left-middle) { background-color: #FAE4E4 !important; color: black !important; font-weight: bold !important; }
+:deep(.finger-left-index) { background-color: #CEA0A0 !important; color: black !important; font-weight: bold !important; }
+:deep(.finger-thumb) { background-color: #EBC2C2 !important; color: black !important; font-weight: bold !important; }
+:deep(.finger-right-index) { background-color: #a37f7f !important; color: black !important; font-weight: bold !important; }
+:deep(.finger-right-middle) { background-color: #E2B6B6 !important; color: black !important; font-weight: bold !important; }
+:deep(.finger-right-ring) { background-color: #FAE4E4 !important; color: black !important; font-weight: bold !important; }
+:deep(.finger-right-pinky) { background-color: #CEA0A0 !important; color: black !important; font-weight: bold !important; }
 
 
 

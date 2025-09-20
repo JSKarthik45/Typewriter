@@ -16,10 +16,16 @@
                 Test your typing speed, all in your browser.
             </h5>
             <br/>
-            <h5>
-                <RouterLink to="/app" class="btn button-effect center" style = "box-shadow: 0 0 10px black;">
+            <h5 class = "center">
+                <RouterLink to="/app" class="btn button-effect" style = "box-shadow: 0 0 10px black;">
                     <h5 class = "mt-1 buttonsize">
                         Start Typing
+                    </h5>
+                </RouterLink>
+                &nbsp;
+                <RouterLink to="/practice" class="btn button-effect" style = "box-shadow: 0 0 10px black;">
+                    <h5 class = "mt-1 buttonsize">
+                        Practice
                     </h5>
                 </RouterLink>
             </h5>
