@@ -3,7 +3,6 @@
 
     const props = defineProps({
         items: Array,
-        isNavOpen: Boolean,
     })
 
     let navbar = ref(null);
@@ -25,7 +24,7 @@
                     <span class = "navbar-toggler-icon"></span>
                 </div>    
             </button>
-            <div :class="['collapse', 'navbar-collapse', { show: props.isNavOpen }]" id="navbarSupportedContent">
+            <div :class="['collapse', 'navbar-collapse']" id="navbarSupportedContent">
                 <ul class = "navbar-nav center">
                     <li class = "nav-item center">
                         <RouterLink to="/" class="desktop-logo d-none d-sm-flex align-items-center nav-link m-1 p-1">

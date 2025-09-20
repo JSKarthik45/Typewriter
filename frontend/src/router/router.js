@@ -1,7 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import LandingPage from "@/LandingPage.vue";
 import Typewriter from "@/Typewriter.vue";
-import SpeedTest from "@/SpeedTest.vue";
+import Practice from "@/Practice.vue";
 import { usePostHog } from '@/composables/usePostHog'
 
 const router = createRouter({
@@ -18,9 +18,9 @@ const router = createRouter({
       component: Typewriter,
     },
     {
-      path: '/speedtest',
-      name: 'SpeedTest',
-      component: SpeedTest,
+      path: '/practice',
+      name: 'Practice',
+      component: Practice,
     },
   ],
   scrollBehavior() {

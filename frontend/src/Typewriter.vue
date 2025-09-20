@@ -11,9 +11,6 @@
     let typewriterAudio = new Audio('/s3.wav');
     let returnAudio = new Audio('/s4.m4a');
     let bellAudio = new Audio('/s5.wav');
-    typewriterAudio.volume = 0.5;
-    returnAudio.volume = 0.5;
-    bellAudio.volume = 0.5;
         function playTypewriterSound() {
             const audio = new Audio('/s3.wav');
               audio.play();
@@ -197,7 +194,7 @@ function clearCanvas() {
 <template>
     <div style = "width: 100vw; height: 100vh; display:flex; align-items: end; justify-content: center;">
         <div class="typewriter-btn-bar-left">
-            <button v-if="str && str.length > 0 && str.value !== ''" class="button-effect" @click="clearCanvas">Clear canvas</button>
+            <button v-if="str && str.length > 0 && str.value !== ''" class="button-effect" @click="clearCanvas">Change Paper</button>
         </div>
         <div class="typewriter-btn-bar">
             <input type="file" id="uploadTxt" accept=".txt" style="display:none" @change="uploadTxtFile" />
@@ -234,55 +231,57 @@ function clearCanvas() {
 </template>
 
 <style scoped>
-    .typewriter-btn-bar-left {
-        position: fixed;
-        top: 0;
-        left: 0;
-        z-index: 10001;
-        display: flex;
-        gap: 12px;
-        padding: 18px 0 0 24px;
-        background: none;
-    }
     @media (max-width: 575px) {
         .typewriter-btn-bar-left {
             position: absolute;
-            top: 70px;
-            left: 0;
+            top: 95px;
+            left: 0px;
             width: 100vw;
             justify-content: flex-start;
             padding: 8px 0 0 8px;
         }
         .typewriter-btn-bar {
             position: absolute;
-            top: 70px;
-            right: 0;
+            top: 60px;
+            right: 0px;
             width: 100vw;
             justify-content: flex-end;
             padding: 8px 8px 0 0;
         }
     }
-    .typewriter-btn-bar {
-        position: fixed;
-        top: 0;
-        right: 0;
-        z-index: 10001;
-        display: flex;
-        gap: 12px;
-        padding: 18px 24px 0 0;
-        background: none;
+    @media (min-width: 576px) {
+        .typewriter-btn-bar-left {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10001;
+            display: flex;
+            gap: 12px;
+            padding: 18px 0 0 24px;
+            background: none;
+        }
+        .typewriter-btn-bar {
+            position: fixed;
+            top: 0;
+            right: 0;
+            z-index: 10001;
+            display: flex;
+            gap: 12px;
+            padding: 18px 24px 0 0;
+            background: none;
+        }
     }
     .button-effect {
         position: relative;
         box-shadow: 0 0 10px black;
-        font-weight: 700;
-        font-size: large;
+        font-weight: 300;
+        font-size: small;
         background-color: #FAE4E4;
         color: black;
         border: none;
-        padding: 10px 30px;
+        padding: 5px 15px;
         margin: 5px;
-        border-radius: 15px;
+        border-radius: 10px;
         z-index: 1;
     }
     .button-effect:hover {
@@ -293,7 +292,7 @@ function clearCanvas() {
         position: absolute;
         color: white;
         background-color: transparent;
-        border-radius: 15px;
+        border-radius: 10px;
         bottom: 0;
         left: 0;
         height: 100%;
